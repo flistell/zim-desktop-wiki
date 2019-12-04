@@ -320,7 +320,7 @@ class Re(object):
 
 	Usage::
 
-		my_re = Re('^(\w[\w\+\-\.]+)\?(.*)')
+		my_re = Re(r'^(\w[\w\+\-\.]+)\?(.*)')
 
 		if my_re.match(string):
 			print my_re[1], my_re[2]
@@ -412,11 +412,11 @@ class Re(object):
 		return self.m.end(group)
 
 # Some often used regexes
-is_uri_re = Re('^(\w[\w\+\-\.]*):')
+is_uri_re = Re(r'^(\w[\w\+\-\.]*):')
 	# "scheme:"
-is_url_re = Re('^(\w[\w\+\-\.]*)://')
+is_url_re = Re(r'^(\w[\w\+\-\.]*)://')
 	# "scheme://"
-is_email_re = Re('^(mailto:\S+|[^\s:]+)\@\S+\.\w+(\?.+)?$', re.U)
+is_email_re = Re(r'^(mailto:\S+|[^\s:]+)\@\S+\.\w+(\?.+)?$', re.U)
 	# "mailto:" address
 	# name "@" host
 	# but exclude other uris like mid: and cid:
@@ -428,9 +428,9 @@ is_win32_path_re = Re(r'^[A-Za-z]:[\\/]')
 is_win32_share_re = Re(r'^(\\\\[^\\]+\\.+|smb://)')
 	# \\host\share
 	# smb://host/share
-is_interwiki_re = Re('^(\w[\w\+\-\.]*)\?(.*)', re.U)
+is_interwiki_re = Re(r'^(\w[\w\+\-\.]*)\?(.*)', re.U)
 	# identifier "?" path
-is_interwiki_keyword_re = re.compile('^\w[\w+\-.]*$', re.U)
+is_interwiki_keyword_re = re.compile(r'^\w[\w+\-.]*$', re.U)
 
 
 _classes = {'c': r'[^\s"<>\']'} # limit the character class a bit

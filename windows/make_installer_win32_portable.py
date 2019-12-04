@@ -48,4 +48,4 @@ if not path.exists("dist"):
 
 # Run NSIS compiler
 
-subprocess.check_call([MAKENSIS, "windows\src\zim-installer-portable.nsi"])
+subprocess.check_call([MAKENSIS, r"windows\src\zim-installer-portable.nsi"])

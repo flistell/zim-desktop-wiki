@@ -1156,7 +1156,7 @@ FooBaz Foo Bar
 </zim-tree>''')
 		buffer.set_parsetree(tree)
 
-		finder.find('Foo(\w*)', FIND_REGEX) # not case sensitive!
+		finder.find(r'Foo(\w*)', FIND_REGEX) # not case sensitive!
 		finder.find_next()
 		self.assertSelection(buffer, 0, 4, 'FooBar')
 
@@ -2282,7 +2282,7 @@ class TestPageViewActions(tests.TestCase):
 			pageview.edit_object()
 
 		text = ''.join(pageview.page.dump('wiki')).strip()
-		self.assertTrue(text.startswith('{{') and text.endswith('?href=test}}'), '%r does not match \{\{...?href=test\}\}' % text)
+		self.assertTrue(text.startswith('{{') and text.endswith('?href=test}}'), r'%r does not match \{\{...?href=test\}\}' % text)
 		self.assertEqual(File(text[2:-12]), file)
 
 	def testEditObjectForObject(self):
@@ -2359,7 +2359,7 @@ class TestPageViewActions(tests.TestCase):
 			pageview.show_insert_image()
 
 		text = ''.join(pageview.page.dump('wiki')).strip()
-		self.assertTrue(text.startswith('{{') and text.endswith('}}'), '%r does not match \{\{...\}\}' % text)
+		self.assertTrue(text.startswith('{{') and text.endswith('}}'), r'%r does not match \{\{...\}\}' % text)
 		self.assertEqual(File(text[2:-2]), file)
 
 	def testInsertBulletList(self):

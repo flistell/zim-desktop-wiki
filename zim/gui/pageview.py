@@ -115,7 +115,7 @@ BULLETS = (BULLET, UNCHECKED_BOX, CHECKED_BOX, XCHECKED_BOX, MIGRATED_BOX)
 CHECKBOXES = (UNCHECKED_BOX, CHECKED_BOX, XCHECKED_BOX, MIGRATED_BOX)
 
 NUMBER_BULLET = '#.' # Special case for autonumbering
-is_numbered_bullet_re = re.compile('^(\d+|\w|#)\.$')
+is_numbered_bullet_re = re.compile(r'^(\d+|\w|#)\.$')
 	#: This regular expression is used to test whether a bullet belongs to a numbered list or not
 
 # Check the (undocumented) list of constants in Gtk.keysyms to see all names

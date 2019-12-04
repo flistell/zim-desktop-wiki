@@ -30,7 +30,7 @@ this should be sufficient.
 
 Note that the regexes are compiles using the flags C{re.U}, C{re.M},
 and C{re.X}. This means any whitespace in the expression is ignored,
-and a literal space need to be written as "C{\ }". In general you need
+and a literal space need to be written as r"C{\ }". In general you need
 to use the "r" string prefix to ensure those backslashes make it
 through to the final expression.
 '''

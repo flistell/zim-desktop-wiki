@@ -38,7 +38,7 @@ bullet_pattern = '(?:[\\*\u2022]|\\[[ \\*x>]\\]|\\d+\\.|[a-zA-Z]\\.)[\\ \\t]+'
 bullet_line_re = re.compile(r'^(\t*)(%s)(.*\n)$' % bullet_pattern)
 	# matches list item: prefix, bullet, text
 
-number_bullet_re = re.compile('^(\d+|[a-zA-Z])\.$')
+number_bullet_re = re.compile(r'^(\d+|[a-zA-Z])\.$')
 def check_number_bullet(bullet):
 	'''If bullet is a numbered bullet this returns the number or letter,
 	C{None} otherwise
@@ -49,14 +49,14 @@ def check_number_bullet(bullet):
 	else:
 		return None
 
-param_re = re.compile('([\w-]+)=("(?:[^"]|"{2})*"|\S*)')
+param_re = re.compile(r'([\w-]+)=("(?:[^"]|"{2})*"|\S*)')
 	# matches parameter list for objects
 	# allow name="foo bar" and name=Foo
 
 empty_lines_re = re.compile(r'((?:^[ \t]*\n)+)', re.M | re.U)
 	# match multiple empty lines
 
-unindented_line_re = re.compile('^\S', re.M)
+unindented_line_re = re.compile(r'^\S', re.M)
 	# match any unindented line
 
 
