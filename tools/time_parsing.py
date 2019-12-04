@@ -3,12 +3,12 @@
 
 # Copyright 2012 Jaap Karssenberg <jaap.karssenberg@gmail.com>
 
+import tests
+import zim.fs
+import zim.formats
 import sys
 sys.path.insert(0, '.')
 
-import zim.formats
-import zim.fs
-import tests
 
 def setup():
 	global parser, dumper

@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 
+from zim._lib import xdot
+from class_tree import *
 from gi.repository import Gtk
 import sys
 
 sys.path.insert(0, '.')
 
-from class_tree import *
-from zim._lib import xdot
 
 
 class Graph(object):

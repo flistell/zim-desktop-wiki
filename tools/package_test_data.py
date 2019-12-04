@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 
+import zim.stores.xml
+import zim.stores.files
+from zim.notebook import Path
+from zim.fs import *
 import sys
 
 sys.path.insert(0, '.')
 
-from zim.fs import *
-from zim.notebook import Path
-import zim.stores.files
-import zim.stores.xml
 
 
 def walk(store, path):
