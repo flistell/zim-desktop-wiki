@@ -178,12 +178,31 @@ def encode_xml(text):
 	'''
 	return text.replace('&', '&amp;').replace('>', '&gt;').replace('<', '&lt;').replace('"', '&quot;').replace("'", '&apos;')
 
+_WIKI_SYNTAX = [
+	# Syntax friendly name, module name, extension
+	# TODO: generate the list from syntax info (native == True)
+	('Zim Wiki', 'wiki', '.zim.txt'),
+	('Markdown', 'wiki_md', '.txt'),
+]
+
+def get_extensions(syntax=None):
+	'''Returns extensions for all wiki syntax if
+	:param syntax: friendly name of syntax
+	:returns: list of all syntax if C(syntax) is C(None) else string
+	'''
+	if syntax:
+		for (n, m, e) in _WIKI_SYNTAX:
+			if n == syntax:
+				return e
+	return [e for (n, m, e) in _WIKI_SYNTAX]
 
 def list_formats(type):
 	if type == EXPORT_FORMAT:
 		return ['HTML', 'LaTeX', 'Markdown (pandoc)', 'RST (sphinx)']
 	elif type == TEXT_FORMAT:
 		return ['Text', 'Wiki', 'Markdown (pandoc)', 'RST (sphinx)']
+	elif type == NATIVE_FORMAT:
+		return [s for (s, m, e) in _WIKI_SYNTAX]
 	else:
 		assert False, 'TODO'
 
