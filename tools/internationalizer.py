@@ -119,7 +119,7 @@ class Internationalizer(Gtk.Window):
 		notsure = []
 		tokens = tokenize.generate_tokens(open(self.file).readline)
 
-		reset = lambda: {'funcname': None, 'isfunc': False, 'iskey': False}
+		def reset(): return {'funcname': None, 'isfunc': False, 'iskey': False}
 		state = reset()
 
 		for type, string, start, end, line in tokens:

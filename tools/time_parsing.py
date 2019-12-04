@@ -59,7 +59,7 @@ if __name__ == '__main__':
 		t = Timer(testcode, setupcode)
 		try:
 			result = t.repeat(reps, passes)
-		except:
+		except BaseException:
 			print("FAILED running %s" % func)
 			t.print_exc()
 		else:
