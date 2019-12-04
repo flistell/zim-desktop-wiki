@@ -38,10 +38,10 @@ def random_links(my_depth):
 
 	if my_depth < depth:
 		for n in range(random.randint(0, n_links)):
-			links.append("[[+%s]]\n" % random_name(my_depth+1))
+			links.append("[[+%s]]\n" % random_name(my_depth + 1))
 	else:
 		for n in range(random.randint(0, n_links)):
-			links.append("[[%s]]\n" % random_name(my_depth-1))
+			links.append("[[%s]]\n" % random_name(my_depth - 1))
 
 	for n in range(random.randint(0, n_links)):
 		links.append("[[%s]]\n" % random_date_page())
@@ -66,7 +66,7 @@ def populate_level(path, j):
 	os.mkdir(path)
 	d = 1
 
-	for i in range(1, width+1):
+	for i in range(1, width + 1):
 		myname = name % (j, i)
 
 		filename = os.path.join(path, "{}.txt".format(myname))
