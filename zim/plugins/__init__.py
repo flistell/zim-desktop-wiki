@@ -183,7 +183,7 @@ class ExtensionBase(SignalEmitter, ConnectorMixin):
 		for klass in walk(self.__class__):
 			try:
 				klass.teardown(self)
-			except:
+			except BaseException:
 				logger.exception('Exception while disconnecting %s (%s)', self, klass)
 			# in case you are wondering: issubclass(Foo, Foo) evaluates True
 
@@ -437,7 +437,7 @@ class PluginManagerClass(ConnectorMixin, collections.Mapping):
 				logger.debug("Load extension: %s", ext_class)
 				try:
 					ext = ext_class(plugin, obj)
-				except:
+				except BaseException:
 					logger.exception('Failed loading extension %s for plugin %s', ext_class, plugin)
 				else:
 					plugin.extensions.add(ext)
@@ -705,7 +705,7 @@ class PluginClass(ConnectorMixin):
 		try:
 			self.disconnect_all()
 			self.teardown()
-		except:
+		except BaseException:
 			logger.exception('Exception while disconnecting %s', self)
 
 	def teardown(self):

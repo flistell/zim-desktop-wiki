@@ -115,7 +115,7 @@ class Dumper(TextDumper):
 		aligns, _wraps = TableParser.get_options(attrib)
 		maxwidths = TableParser.width2dim(rows)
 		headsep = TableParser.headsep(maxwidths, aligns, x='|', y='-')
-		rowline = lambda row: TableParser.rowline(row, maxwidths, aligns)
+		def rowline(row): return TableParser.rowline(row, maxwidths, aligns)
 
 		# print table
 		table += [rowline(rows[0])]

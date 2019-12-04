@@ -338,7 +338,7 @@ class QuickNoteDialog(Dialog):
 				self.form.widgets['namespace'].notebook = obj
 				self.form.widgets['page'].notebook = obj
 				logger.debug('Notebook for autocomplete: %s (%s)', obj, notebook)
-			except:
+			except BaseException:
 				logger.exception('Could not set notebook: %s', notebook)
 		else:
 			self.form.widgets['namespace'].notebook = None

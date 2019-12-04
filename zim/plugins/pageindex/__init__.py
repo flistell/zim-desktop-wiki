@@ -516,7 +516,7 @@ class PageTreeView(BrowserTreeView):
 
 		try:
 			self.notebook.move_page(source, dest, update_links=True)
-		except:
+		except BaseException:
 			logger.exception('Failed to move page %s -> %s', source, dest)
 			dragcontext.finish(False, False, time) # NOK
 		else:

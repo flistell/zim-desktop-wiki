@@ -289,7 +289,7 @@ class FileBrowserIconView(Gtk.IconView):
 			if self._monitor:
 				monitor, id = self._monitor
 				monitor.disconnect(id)
-		except:
+		except BaseException:
 			logger.exception('Could not cancel file monitor')
 		finally:
 			self._monitor = None
@@ -300,7 +300,7 @@ class FileBrowserIconView(Gtk.IconView):
 
 		try:
 			self._thumbnailer.clear_queue()
-		except:
+		except BaseException:
 			logger.exception('Could not stop thumbnailer')
 
 		self.get_model().clear()
@@ -407,7 +407,7 @@ class FileBrowserIconView(Gtk.IconView):
 		paths = self.get_selected_items()
 		if paths:
 			model = self.get_model()
-			path_to_uri = lambda p: self.folder.file(model[p][BASENAME_COL]).uri
+			def path_to_uri(p): return self.folder.file(model[p][BASENAME_COL]).uri
 			uris = list(map(path_to_uri, paths))
 			data = pack_urilist(uris)
 			selectiondata.set(selectiondata.get_target(), 8, data)

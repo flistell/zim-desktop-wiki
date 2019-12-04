@@ -13,14 +13,14 @@ logger = logging.getLogger('zim.pugin.sourceview')
 try:
 	from gi.repository import Gtk
 	from gi.repository import Pango
-except:
+except BaseException:
 	Gtk = None
 
 try:
 	import gi
 	gi.require_version('GtkSource', '3.0')
 	from gi.repository import GtkSource
-except:
+except BaseException:
 	GtkSource = None
 
 from zim.plugins import PluginClass, InsertedObjectTypeExtension
@@ -175,7 +175,7 @@ class SourceViewBuffer(_bufferclass):
 	def _set_language(self, lang):
 		try:
 			GtkSource.Buffer.set_language(self, lm.get_language(lang))
-		except:
+		except BaseException:
 			logger.exception('Could not set language for sourceview: %s', lang)
 
 	def get_object_data(self):

@@ -513,7 +513,7 @@ class SearchSelection(PageSelection):
 			#~ print('!! Search content', page)
 			try:
 				tree = page.get_parsetree()
-			except:
+			except BaseException:
 				logger.exception('Exception while reading: %s', page)
 				continue
 

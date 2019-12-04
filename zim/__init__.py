@@ -167,7 +167,7 @@ try:
 	else:
 		# Hope the system knows where to find the data
 		gettext.install('zim', None, names=('_', 'gettext', 'ngettext'))
-except:
+except BaseException:
 	logger.exception('Error loading translation')
 	trans = gettext.NullTranslations()
 	trans.install(names=('_', 'gettext', 'ngettext'))

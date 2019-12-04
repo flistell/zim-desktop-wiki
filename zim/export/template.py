@@ -440,7 +440,7 @@ class ParseTreeProxy(object):
 				return ''.join(lines)
 			else:
 				return ''
-		except:
+		except BaseException:
 			logger.exception('Exception exporting page: %s', self._page.name)
 			raise # will result in a "no such parameter" kind of error
 
@@ -452,7 +452,7 @@ class ParseTreeProxy(object):
 				return ''.join(lines)
 			else:
 				return ''
-		except:
+		except BaseException:
 			logger.exception('Exception exporting page: %s', self._page.name)
 			raise # will result in a "no such parameter" kind of error
 

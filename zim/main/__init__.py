@@ -572,7 +572,7 @@ def build_command(args, pwd=None):
 		try:
 			mod = get_module('zim.plugins.' + cmd)
 			klass = lookup_subclass(mod, Command)
-		except:
+		except BaseException:
 			if '-D' in args or '--debug' in args:
 				logger.exception('Error while loading: zim.plugins.%s.Command', cmd)
 				# Can't use following because log level not yet set:
@@ -763,7 +763,7 @@ class ZimApplication(object):
 			for toplevel in list(self._windows):
 				try:
 					toplevel.destroy()
-				except:
+				except BaseException:
 					logger.exception('Exception while destroying window')
 					self.remove_window(toplevel) # force removal
 
@@ -853,7 +853,7 @@ class ZimApplication(object):
 		try:
 			si = file(os.devnull, 'r')
 			os.dup2(si.fileno(), sys.stdin.fileno())
-		except:
+		except BaseException:
 			pass
 
 		loglevel = logging.getLogger().getEffectiveLevel()
@@ -879,7 +879,7 @@ class ZimApplication(object):
 			try:
 				os.dup2(err_stream.fileno(), sys.stdout.fileno())
 				os.dup2(err_stream.fileno(), sys.stderr.fileno())
-			except:
+			except BaseException:
 				sys.stdout = err_stream
 				sys.stderr = err_stream
 
@@ -893,7 +893,7 @@ class ZimApplication(object):
 				handler = logging.StreamHandler()
 				handler.setFormatter(logging.Formatter('%(levelname)s: %(message)s'))
 				rootlogger.addHandler(handler)
-			except:
+			except BaseException:
 				pass
 
 

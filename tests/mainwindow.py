@@ -11,7 +11,7 @@ from zim.plugins import PluginManager
 from zim.gui.mainwindow import *
 
 
-is_sensitive = lambda w: w.get_property('sensitive')
+def is_sensitive(w): return w.get_property('sensitive')
 
 
 def setUpMainWindow(notebook, path='Test', plugins=None):

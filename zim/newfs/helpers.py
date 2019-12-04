@@ -114,7 +114,7 @@ class FSObjectMonitor(SignalEmitter):
 				file = Gio.File.new_for_uri(self.path.uri)
 				self._gio_file_monitor = file.monitor(0, None)
 				self._gio_file_monitor.connect('changed', self._on_changed)
-			except:
+			except BaseException:
 				logger.exception('Error while setting up file monitor')
 
 	def _teardown_signal(self, signal):
@@ -122,7 +122,7 @@ class FSObjectMonitor(SignalEmitter):
 		and self._gio_file_monitor:
 			try:
 				self._gio_file_monitor.cancel()
-			except:
+			except BaseException:
 				logger.exception('Error while tearing down file monitor')
 			finally:
 				self._gio_file_monitor = None

@@ -19,7 +19,7 @@ try:
 	import gi
 	gi.require_version('AppIndicator3', '0.1')
 	from gi.repository import AppIndicator3 as AppIndicator
-except:
+except BaseException:
 	AppIndicator = None
 
 

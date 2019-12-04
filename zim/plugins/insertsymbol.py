@@ -57,7 +57,7 @@ This is a core plugin shipping with zim.
 					self.symbol_order.append(shortcut)
 				else:
 					logger.exception('Shortcut defined twice: %s', shortcut)
-			except:
+			except BaseException:
 				logger.exception('Could not parse symbol: %s', line)
 
 	def get_symbols(self):

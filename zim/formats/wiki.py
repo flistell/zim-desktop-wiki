@@ -226,7 +226,7 @@ class WikiParser(object):
 			body = ''.join(lines[2:])
 			try:
 				return self.parse_table(builder, headerrow, alignstyle, body)
-			except:
+			except BaseException:
 				logger.exception('Could not parse table object')
 
 		self._parse_object(builder, indent, otype, param, body)

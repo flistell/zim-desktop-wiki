@@ -283,7 +283,7 @@ def _link_tree(links, notebook, path):
 			try:
 				file = File(link)
 				isimage = file.isimage()
-			except:
+			except BaseException:
 				pass
 
 		logger.debug('Pasting link: %s (type: %s, isimage: %s)', link, type, isimage)

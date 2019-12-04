@@ -110,7 +110,7 @@ class TestApplications(tests.TestCase):
 		try:
 			cwd, argv = app._checkargs(None, ())
 			self.assertEqual(argv, ('foo.py',))
-		except:
+		except BaseException:
 			del sys.frozen
 			raise
 		else:

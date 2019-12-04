@@ -58,7 +58,7 @@ class HistoryList(list):
 		try:
 			for name, cursor, scroll in list:
 				self.append(HistoryPath(name, cursor, scroll))
-		except:
+		except BaseException:
 			logger.exception('Could not parse history list:')
 
 	def __getitem__(self, i):
@@ -173,7 +173,7 @@ class History(SignalEmitter):
 
 	def _on_page_deleted(self, nb, page):
 		# Remove deleted pages from recent
-		f = lambda p: p == page or p.ischild(page)
+		def f(p): return p == page or p.ischild(page)
 
 		changed = False
 		for path in filter(f, self._recent):

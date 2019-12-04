@@ -174,7 +174,7 @@ class ServerWindow(Gtk.Window):
 				raise Exception('Socket disconnected')
 			else:
 				self.httpd.handle_request()
-		except:
+		except BaseException:
 			logger.exception('Exception while handling IO request:')
 
 		return True # keep event running

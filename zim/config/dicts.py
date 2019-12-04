@@ -151,12 +151,12 @@ class ConfigDefinition(object):
 			# Backward compatibility
 			try:
 				value = json.loads(value)
-			except:
+			except BaseException:
 				pass
 		else:
 			try:
 				value = ast.literal_eval(value)
-			except:
+			except BaseException:
 				pass
 
 		return value
@@ -214,7 +214,7 @@ class ConfigDefinitionByClass(ConfigDefinition):
 			# Class has special contructor (which can also raise ValueError)
 			try:
 				return self.klass.new_from_zim_config(value)
-			except:
+			except BaseException:
 				logger.debug('Error while converting %s to %s', value, self.klass, exc_info=1)
 				raise ValueError('Can not convert %s to %s' % (value, self.klass))
 		else:
@@ -289,7 +289,7 @@ class Integer(ConfigDefinition):
 		else:
 			try:
 				return int(value)
-			except:
+			except BaseException:
 				raise ValueError('Must be integer')
 
 
@@ -304,7 +304,7 @@ class Float(ConfigDefinition):
 		else:
 			try:
 				return float(value)
-			except:
+			except BaseException:
 				raise ValueError('Must be integer')
 
 
@@ -839,7 +839,7 @@ class INIConfigFile(SectionedConfigDict):
 							lines.append('%s=%s\n' % (key, section.definitions[key].tostring(value)))
 						else:
 							lines.append('%s=%s\n' % (key, value))
-					except:
+					except BaseException:
 						logger.exception('Error serializing "%s" in section "[%s]"', key, name)
 			lines.append('\n')
 

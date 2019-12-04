@@ -254,7 +254,7 @@ class NotebookInfoList(list):
 		self.read()
 		try:
 			self.update()
-		except:
+		except BaseException:
 			logger.exception('Exception while loading notebook list:')
 
 	def read(self):

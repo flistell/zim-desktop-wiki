@@ -30,7 +30,7 @@ def load_zim_stock_icons():
 			icon_theme = Gtk.IconTheme.get_default()
 			try:
 				pixbuf = icon_theme.load_icon(name, 24, 0)
-			except:
+			except BaseException:
 				path = dir.file(basename).path
 				pixbuf = GdkPixbuf.Pixbuf.new_from_file(path)
 

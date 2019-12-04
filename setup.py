@@ -26,7 +26,7 @@ import makeman # helper script
 
 try:
 	assert sys.version_info >= (3, 2)
-except:
+except BaseException:
 	print('zim needs python >= 3.2', file=sys.stderr)
 	sys.exit(1)
 

@@ -216,7 +216,7 @@ class BookmarkBar(Gtk.HBox, ConnectorMixin):
 				try:
 					name = self._convert_path_name(name)
 					self.paths_names[path] = name
-				except:
+				except BaseException:
 					logger.error('BookmarksBar: Error while loading path_names.')
 
 		# Delete a bookmark if a page is deleted.
@@ -354,7 +354,7 @@ class BookmarkBar(Gtk.HBox, ConnectorMixin):
 			try:
 				# Take from clipboard.
 				new_name = self._convert_path_name(Clipboard.get_text())
-			except:
+			except BaseException:
 				logger.error('BookmarksBar: Error while converting from buffer.')
 			if new_name:
 				self.paths_names[_full] = new_name

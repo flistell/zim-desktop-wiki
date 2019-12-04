@@ -146,7 +146,7 @@ except ImportError:
 from zim.signals import SignalEmitter
 from zim.errors import Error
 
-NOOP = lambda: None
+def NOOP(): return None
 
 
 class NotebookOperationOngoing(Error):

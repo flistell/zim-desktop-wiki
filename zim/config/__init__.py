@@ -115,7 +115,7 @@ def user_dirs():
 					key, value = line.split('=', 1)
 					value = os.path.expandvars(value.strip('"'))
 					dirs[key] = Dir(value)
-				except:
+				except BaseException:
 					logger.exception('Exception while parsing %s', file)
 	except FileNotFoundError:
 		pass

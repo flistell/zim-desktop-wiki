@@ -196,7 +196,7 @@ class PreferencesDialog(Dialog):
 				if name in self.p_save_loaded and name not in now_loaded:
 					try:
 						self.plugins.load_plugin(name)
-					except:
+					except BaseException:
 						logger.exception('Could not restore plugin: %s', name)
 				elif name not in self.p_save_loaded and name in now_loaded:
 					self.plugins.remove_plugin(name)
@@ -252,7 +252,7 @@ class PluginsTab(Gtk.VBox):
 
 		try:
 			self.treeselection.select_path(0)
-		except:
+		except BaseException:
 			pass # maybe loading plugins failed
 
 		## Add buttons to get and install new plugins
@@ -361,7 +361,7 @@ class PluginsTreeModel(Gtk.ListStore):
 				klass = self.plugins.get_plugin_class(key)
 				name = klass.plugin_info['name']
 				allplugins.append((name, key, klass))
-			except:
+			except BaseException:
 				logger.exception('Could not load plugin %s', key)
 		allplugins.sort() # sort by translated name
 
@@ -369,7 +369,7 @@ class PluginsTreeModel(Gtk.ListStore):
 			active = key in self.plugins
 			try:
 				activatable = klass.check_dependencies_ok()
-			except:
+			except BaseException:
 				logger.exception('Could not load plugin %s', name)
 			else:
 				self.append((key, active, activatable, name, klass))
@@ -386,7 +386,7 @@ class PluginsTreeModel(Gtk.ListStore):
 		else:
 			try:
 				self.plugins.load_plugin(key)
-			except:
+			except BaseException:
 				logger.exception('Could not load plugin %s', name)
 				# TODO pop error dialog
 			else:

@@ -85,7 +85,7 @@ class TestExceptionHandler(tests.TestCase):
 					message='Running ErrorDialog'
 				):
 					self.testExceptionHandler()
-		except:
+		except BaseException:
 			zim.errors.set_use_gtk(False)
 			raise
 		else:
@@ -97,7 +97,7 @@ class TestExceptionHandler(tests.TestCase):
 		## Handle unexpected error or bug
 		try:
 			raise AssertionError('My AssertionError')
-		except:
+		except BaseException:
 			myfilter = CatchAllLogging()
 			with myfilter:
 				zim.errors.exception_handler('Test Error')
@@ -133,7 +133,7 @@ class TestExceptionHandler(tests.TestCase):
 		## Handle normal application error
 		try:
 			raise zim.errors.Error('My normal Error')
-		except:
+		except BaseException:
 			myfilter = CatchAllLogging()
 			with myfilter:
 				zim.errors.exception_handler('Test Error')
@@ -157,7 +157,7 @@ class TestExceptionHandler(tests.TestCase):
 		## Handle normal IOError
 		try:
 			open('/some/non/existing/file/').read()
-		except:
+		except BaseException:
 			myfilter = CatchAllLogging()
 			with myfilter:
 				zim.errors.exception_handler('Test IOError')

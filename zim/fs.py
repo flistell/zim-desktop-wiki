@@ -1381,7 +1381,7 @@ elif sys.platform == 'win32':
 		try:
 			if not _MoveFileEx(src, dst, 1): # MOVEFILE_REPLACE_EXISTING
 				raise OSError('Could not replace "%s" -> "%s"' % (src, dst))
-		except:
+		except BaseException:
 			# Sometimes it fails - we play stupid and try again...
 			time.sleep(0.5)
 			if not _MoveFileEx(src, dst, 1): # MOVEFILE_REPLACE_EXISTING
@@ -1433,7 +1433,7 @@ class FSObjectMonitor(SignalEmitter):
 				file = Gio.File.new_for_uri(self.path.uri)
 				self._gio_file_monitor = file.monitor()
 				self._gio_file_monitor.connect('changed', self._on_changed)
-			except:
+			except BaseException:
 				logger.exception('Error while setting up file monitor')
 
 	def _teardown_signal(self, signal):
@@ -1441,7 +1441,7 @@ class FSObjectMonitor(SignalEmitter):
 		and self._gio_file_monitor:
 			try:
 				self._gio_file_monitor.cancel()
-			except:
+			except BaseException:
 				logger.exception('Error while tearing down file monitor')
 			finally:
 				self._gio_file_monitor = None

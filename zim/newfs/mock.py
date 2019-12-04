@@ -88,7 +88,7 @@ class MockFSNode(object):
 		if self.isdir:
 			try:
 				return self.data[name]
-			except:
+			except BaseException:
 				if not self.case_sensitive:
 					for childname, child in list(self.data.items()):
 						if childname.lower() == name.lower():
@@ -317,7 +317,7 @@ class MockFolder(MockFSObjectBase, Folder):
 	def exists(self):
 		try:
 			return self._node().isdir
-		except:
+		except BaseException:
 			return False
 
 	def touch(self):

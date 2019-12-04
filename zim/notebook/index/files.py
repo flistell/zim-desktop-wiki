@@ -119,7 +119,7 @@ class FilesIndexer(SignalEmitter):
 						self.update_file(node_id, file)
 					else:
 						self.delete_file(node_id)
-			except:
+			except BaseException:
 				logger.exception('Error while indexing: %s', path)
 				self.db.execute( # avoid looping
 					'UPDATE files SET index_status = ? WHERE id = ?',
@@ -390,7 +390,7 @@ class FilesIndexChecker(object):
 				)
 				self.db.commit()
 
-			except:
+			except BaseException:
 				logger.exception('Error while indexing: %s', path)
 				self.db.execute( # avoid looping
 					'UPDATE files SET index_status = ? WHERE id = ?',

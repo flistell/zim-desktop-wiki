@@ -215,19 +215,19 @@ ui_preferences = (
 		# T: option in preferences dialog
 )
 
-_is_zim_tag = lambda tag: hasattr(tag, 'zim_type')
-_is_indent_tag = lambda tag: _is_zim_tag(tag) and tag.zim_type == 'indent'
-_is_not_indent_tag = lambda tag: _is_zim_tag(tag) and tag.zim_type != 'indent'
-_is_heading_tag = lambda tag: hasattr(tag, 'zim_tag') and tag.zim_tag == 'h'
-_is_pre_tag = lambda tag: hasattr(tag, 'zim_tag') and tag.zim_tag == 'pre'
-_is_line_based_tag = lambda tag: _is_indent_tag(tag) or _is_heading_tag(tag) or _is_pre_tag(tag)
-_is_not_line_based_tag = lambda tag: not _is_line_based_tag(tag)
-_is_style_tag = lambda tag: _is_zim_tag(tag) and tag.zim_type == 'style'
-_is_not_style_tag = lambda tag: not (_is_zim_tag(tag) and tag.zim_type == 'style')
-_is_link_tag = lambda tag: _is_zim_tag(tag) and tag.zim_type == 'link'
-_is_not_link_tag = lambda tag: not (_is_zim_tag(tag) and tag.zim_type == 'link')
-_is_tag_tag = lambda tag: _is_zim_tag(tag) and tag.zim_type == 'tag'
-_is_not_tag_tag = lambda tag: not (_is_zim_tag(tag) and tag.zim_type == 'tag')
+def _is_zim_tag(tag): return hasattr(tag, 'zim_type')
+def _is_indent_tag(tag): return _is_zim_tag(tag) and tag.zim_type == 'indent'
+def _is_not_indent_tag(tag): return _is_zim_tag(tag) and tag.zim_type != 'indent'
+def _is_heading_tag(tag): return hasattr(tag, 'zim_tag') and tag.zim_tag == 'h'
+def _is_pre_tag(tag): return hasattr(tag, 'zim_tag') and tag.zim_tag == 'pre'
+def _is_line_based_tag(tag): return _is_indent_tag(tag) or _is_heading_tag(tag) or _is_pre_tag(tag)
+def _is_not_line_based_tag(tag): return not _is_line_based_tag(tag)
+def _is_style_tag(tag): return _is_zim_tag(tag) and tag.zim_type == 'style'
+def _is_not_style_tag(tag): return not (_is_zim_tag(tag) and tag.zim_type == 'style')
+def _is_link_tag(tag): return _is_zim_tag(tag) and tag.zim_type == 'link'
+def _is_not_link_tag(tag): return not (_is_zim_tag(tag) and tag.zim_type == 'link')
+def _is_tag_tag(tag): return _is_zim_tag(tag) and tag.zim_type == 'tag'
+def _is_not_tag_tag(tag): return not (_is_zim_tag(tag) and tag.zim_type == 'tag')
 
 PIXBUF_CHR = '\uFFFC'
 
@@ -674,7 +674,7 @@ class TextBuffer(Gtk.TextBuffer):
 		self.clear()
 		try:
 			self.insert_parsetree_at_cursor(tree)
-		except:
+		except BaseException:
 			# Prevent auto-save to kick in at any cost
 			self.set_modified(False)
 			raise
@@ -762,7 +762,7 @@ class TextBuffer(Gtk.TextBuffer):
 						level = self.get_indent(line)
 						self._set_indent(line, level, bullet, dir=dir)
 					# else pass, LTR is the default
-		except:
+		except BaseException:
 			# Try to recover buffer state before raising
 			self.update_editmode()
 			startiter = self.get_iter_at_offset(startoffset)
@@ -1121,7 +1121,7 @@ class TextBuffer(Gtk.TextBuffer):
 			else:
 				pixbuf = GdkPixbuf.Pixbuf.new_from_file(file.path)
 			pixbuf = rotate_pixbuf(pixbuf)
-		except:
+		except BaseException:
 			#~ logger.exception('Could not load image: %s', file)
 			logger.warn('No such image: %s', file)
 			widget = Gtk.HBox() # Need *some* widget here...
@@ -3931,7 +3931,7 @@ class TextView(Gtk.TextView):
 			if selection_in_pre_block(start, end):
 				# Handle indent in pre differently
 				missing_tabs = []
-				check_tab = lambda l: (buffer.get_iter_at_line(l).get_char() == '\t') or missing_tabs.append(1)
+				def check_tab(l): return (buffer.get_iter_at_line(l).get_char() == '\t') or missing_tabs.append(1)
 				buffer.foreach_line_in_selection(check_tab)
 				if len(missing_tabs) == 0:
 					return buffer.foreach_line_in_selection(delete_char)
@@ -3974,7 +3974,7 @@ class TextView(Gtk.TextView):
 			if keyval in KEYVALS_TAB:
 				if selection_in_pre_block(start, end):
 					# Handle indent in pre differently
-					prepend_tab = lambda l: buffer.insert(buffer.get_iter_at_line(l), '\t')
+					def prepend_tab(l): return buffer.insert(buffer.get_iter_at_line(l), '\t')
 					buffer.foreach_line_in_selection(prepend_tab)
 				elif multi_line_indent(start, end):
 					buffer.foreach_line_in_selection(buffer.indent)
@@ -5323,7 +5323,7 @@ class PageView(GSignalEmitterMixin, Gtk.VBox):
 				const = self.text_style['TextView']['justify']
 				assert hasattr(gtk, const), 'No such constant: Gtk.%s' % const
 				self.textview.set_justification(getattr(gtk, const))
-			except:
+			except BaseException:
 				logger.exception('Exception while setting justification:')
 
 		# Set properties for TextBuffer
@@ -5351,7 +5351,7 @@ class PageView(GSignalEmitterMixin, Gtk.VBox):
 				testtag = testbuffer.create_tag('style-' + tag, **attrib)
 				if not testtag:
 					raise AssertionError('Could not create tag: %s' % tag)
-			except:
+			except BaseException:
 				logger.exception('Exception while parsing tag: %s:', tag)
 			else:
 				TextBuffer.tag_styles[tag].update(attrib)
@@ -5814,7 +5814,7 @@ class PageView(GSignalEmitterMixin, Gtk.VBox):
 	def do_activate_link(self, link, hints):
 		try:
 			self._do_activate_link(link, hints)
-		except:
+		except BaseException:
 			zim.errors.exception_handler(
 				'Exception during activate-link(%r)' % ((link, hints),))
 
@@ -6778,7 +6778,7 @@ class InsertDateDialog(Dialog):
 				iter = model.append((format, format))
 				if format == self.uistate['lastusedformat']:
 					lastused = iter
-			except:
+			except BaseException:
 				logger.exception('Could not parse date: %s', line)
 
 		if len(model) == 0:
@@ -6999,7 +6999,7 @@ class EditImageDialog(Dialog):
 			info, w, h = GdkPixbuf.Pixbuf.get_file_info(file.path)
 			if w <= 0 or h <= 0:
 				raise AssertionError
-		except:
+		except BaseException:
 			logger.warn('Could not get size for image: %s', file.path)
 			width.set_sensitive(False)
 			height.set_sensitive(False)

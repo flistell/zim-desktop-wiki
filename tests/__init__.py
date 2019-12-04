@@ -738,7 +738,7 @@ class SignalLogger(dict):
 		self._ids = []
 
 		if filter_func is None:
-			filter_func = lambda s, o, a: a
+			def filter_func(s, o, a): return a
 
 		for signal in self._obj.__signals__:
 			seen = []
@@ -775,7 +775,7 @@ class CallBackLogger(dict):
 
 	def __init__(self, filter_func=None):
 		if filter_func is None:
-			filter_func = lambda n, a, kw: (a, kw)
+			def filter_func(n, a, kw): return (a, kw)
 
 		self._filter_func = filter_func
 

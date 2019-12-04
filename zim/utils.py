@@ -96,7 +96,7 @@ def natural_sort(list, key=None):
 			s = key(s)
 			return (natural_sort_key(s), s)
 	else:
-		func = lambda s: (natural_sort_key(s), s)
+		def func(s): return (natural_sort_key(s), s)
 	list.sort(key=func)
 
 

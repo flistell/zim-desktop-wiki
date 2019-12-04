@@ -122,7 +122,7 @@ def get_mimetype(obj):
 		if scheme in (None, 'file'):
 			try:
 				return File(obj).get_mimetype()
-			except:
+			except BaseException:
 				return None
 		else:
 			return "x-scheme-handler/%s" % scheme
@@ -144,7 +144,7 @@ def get_mime_icon(file, size):
 		f = Gio.File.new_for_uri(file.uri)
 		info = f.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, None)
 		icon = info.get_icon()
-	except:
+	except BaseException:
 		logger.exception('Failed to query info for file: %s', file)
 		return None
 

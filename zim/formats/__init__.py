@@ -88,13 +88,13 @@ logger = logging.getLogger('zim.formats')
 # if gtk bindings are not installed
 try:
 	from gi.repository import Pango
-except:
+except BaseException:
 	Pango = None
 	logger.warn('Could not load pango - RTL scripts may look bad')
 
 try:
 	import xml.etree.cElementTree as ElementTreeModule
-except:  #pragma: no cover
+except BaseException:  #pragma: no cover
 	logger.warn('Could not load cElementTree, defaulting to ElementTree')
 	import xml.etree.ElementTree as ElementTreeModule
 
@@ -1755,7 +1755,7 @@ def parse_header_lines(text):
 def dump_header_lines(*headers):
 	'''Return text representation of header dict'''
 	text = []
-	append = lambda k, v: text.extend((k, ': ', v.strip().replace('\n', '\n\t'), '\n'))
+	def append(k, v): return text.extend((k, ': ', v.strip().replace('\n', '\n\t'), '\n'))
 
 	for h in headers:
 		if hasattr(h, 'items'):

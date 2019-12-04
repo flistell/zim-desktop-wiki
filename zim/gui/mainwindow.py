@@ -268,7 +268,7 @@ class MainWindow(Window):
 			try:
 				self.parse_geometry(geometry)
 				self._geometry_set = True
-			except:
+			except BaseException:
 				logger.exception('Parsing geometry string failed:')
 		elif fullscreen:
 			self._set_fullscreen = True

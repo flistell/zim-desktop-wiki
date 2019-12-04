@@ -113,7 +113,7 @@ class Action(ActionMethod):
 		logger.debug('Action: %s', self.name)
 		try:
 			self.__get__(instance, instance.__class__)()
-		except:
+		except BaseException:
 			zim.errors.exception_handler(
 				'Exception during action: %s' % self.name)
 
@@ -292,7 +292,7 @@ class RadioAction(ActionMethod):
 			else:
 				logger.debug('Action: %s(%s)', self.name, key)
 				self.__get__(instance, instance.__class__)(key)
-		except:
+		except BaseException:
 			zim.errors.exception_handler(
 				'Exception during action: %s(%s)' % (self.name, key))
 

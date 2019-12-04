@@ -85,7 +85,7 @@ class Index(SignalEmitter):
 
 		try:
 			self._db = sqlite3.Connection(self.dbpath)
-		except:
+		except BaseException:
 			self._db_recover()
 
 		self._db.row_factory = sqlite3.Row
@@ -116,7 +116,7 @@ class Index(SignalEmitter):
 		file = LocalFile(self.dbpath)
 		try:
 			file.remove(cleanup=False)
-		except:
+		except BaseException:
 			logger.error('Could not access database file, running in-memory database')
 			self.dbpath = ':memory:'
 		finally:

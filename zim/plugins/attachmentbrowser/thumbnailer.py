@@ -108,7 +108,7 @@ def pixbufThumbnailCreator(file, thumbfile, thumbsize):
 		pixbuf = rotate_pixbuf(pixbuf)
 		pixbuf.savev(tmpfile.path, 'png', optionskeys, optionsvalues)
 		_atomic_rename(tmpfile.path, thumbfile.path)
-	except:
+	except BaseException:
 		raise ThumbnailCreatorFailure
 	else:
 		return pixbuf
@@ -177,7 +177,7 @@ class ThumbnailQueue(object):
 							self._out_queue.put_nowait((file, size, thumbfile, pixbuf, mtime))
 						else:
 							self._count -= 1 # skip
-				except:
+				except BaseException:
 					logger.exception('Exception in thumbnail queue')
 					self._count -= 1 # drop
 		except QueueEmpty:

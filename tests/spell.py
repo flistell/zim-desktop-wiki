@@ -10,12 +10,12 @@ try:
 	import gi
 	gi.require_version('GtkSpell', '3.0')
 	from gi.repository import GtkSpell as gtkspell
-except:
+except BaseException:
 	gtkspell = None
 
 try:
 	import gtkspellcheck
-except:
+except BaseException:
 	gtkspellcheck = None
 
 

@@ -385,7 +385,7 @@ class Parser:
                             resultado = str(evaluate(valorLeft,
                                         variables=variables, functions=functions))
                             self.writeResult(i, lines, mEqualSignAct.end(), RightActEnd, resultado)
-                        except:
+                        except BaseException:
                             logger.warn('eval error: %s, %s, %s, %s', tipoLeft, valorLeft, tipoRight, valorRight)
                     elif tipoLeft == 'n' and tipoRight in 'ifav':
                         if valorLeft not in functions:     # variable on the left
@@ -394,7 +394,7 @@ class Parser:
                                     variables[valorLeft] = str(evaluate(str(valorRight),
                                                             variables=variables, functions=functions))
 
-                                except:
+                                except BaseException:
                                     logger.warn('exec error: %s, %s, %s, %s', tipoLeft, valorLeft, tipoRight, valorRight)
                                     raise
                             else:                   # evaluate a variable
@@ -409,7 +409,7 @@ class Parser:
                                     resultado = str(evaluate(valorLeft,
                                                 variables=variables, functions=functions))
                                     self.writeResult(i, lines, mEqualSignAct.end(), RightActEnd, resultado)
-                                except:
+                                except BaseException:
                                     logger.warn('eval error: %s, %s, %s, %s', tipoLeft, valorLeft, tipoRight, valorRight)
                             else:                   # recurrence relation
                                 if valorLeft not in variables:            # initial value

@@ -96,7 +96,7 @@ class GNURPlotGenerator(ImageGeneratorClass):
 			gnu_r = Application(gnu_r_cmd)
 			#~ gnu_r.run(args=('-f', plotscriptfile.basename, ), cwd=plotscriptfile.dir)
 			gnu_r.run(args=('-f', plotscriptfile.basename, '--vanilla'), cwd=plotscriptfile.dir)
-		except:
+		except BaseException:
 			return None, None # Sorry, no log
 		else:
 			return pngfile, None

@@ -861,7 +861,7 @@ state. Or select multiple versions to see changes between those versions.
 		order = self.uistate.setdefault('sortorder', Gtk.SortType.DESCENDING)
 		try:
 			self.versionlist.get_model().set_sort_column_id(col, order)
-		except:
+		except BaseException:
 			logger.exception('Invalid sort column: %s %s', col, order)
 
 		# -----

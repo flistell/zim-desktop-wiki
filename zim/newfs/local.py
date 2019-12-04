@@ -253,7 +253,7 @@ elif sys.platform == 'win32':
 		try:
 			if not _MoveFileEx(src, dst, 1): # MOVEFILE_REPLACE_EXISTING
 				raise OSError('Could not replace "%s" -> "%s"' % (src, dst))
-		except:
+		except BaseException:
 			# Sometimes it fails - we play stupid and try again...
 			time.sleep(0.5)
 			if not _MoveFileEx(src, dst, 1): # MOVEFILE_REPLACE_EXISTING
@@ -305,7 +305,7 @@ class AtomicWriteContext(object):
 			# errors happened - try to clean up
 			try:
 				os.remove(self.tmppath)
-			except:
+			except BaseException:
 				pass
 
 

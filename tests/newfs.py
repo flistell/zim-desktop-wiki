@@ -778,7 +778,7 @@ class TestLocalFS(tests.TestCase, TestFS):
 			with AtomicWriteContext(file) as fh:
 				fh.write('truncate!')
 				raise AssertionError
-		except:
+		except BaseException:
 			pass
 
 		self.assertEqual(file.read(), 'test 123\n') # No truncated on error

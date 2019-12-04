@@ -192,7 +192,7 @@ class ConnectorMixin(object):
 			for key in list(self._connected_signals.keys()):
 				try:
 					self._disconnect_from(key)
-				except:
+				except BaseException:
 					logger.exception('Exception in disconnect_all()')
 
 	def _disconnect_from(self, key):
@@ -363,7 +363,7 @@ class SignalEmitter(object, metaclass=SignalEmitterMeta):
 		for c, i, handler in self._signal_handlers.get(signal, []):
 			try:
 				r = handler(self, *args)
-			except:
+			except BaseException:
 				logger.exception('Exception in signal handler for %s on %s', signal, self)
 
 	def emit_return_first(self, signal, *args):
@@ -389,7 +389,7 @@ class SignalEmitter(object, metaclass=SignalEmitterMeta):
 					yield handler(self, *args)
 				except GeneratorExit:
 					raise
-				except:
+				except BaseException:
 					logger.exception('Exception in signal handler for %s on %s', signal, self)
 
 	def block_signals(self, *signals):

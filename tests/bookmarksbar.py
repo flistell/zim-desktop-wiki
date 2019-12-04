@@ -128,7 +128,7 @@ class TestBookmarksBar(tests.TestCase):
 		self.assertEqual(bar.paths, ['1', '5', '2', '4', '3'])
 
 		# Check rename_bookmark and save options.
-		preferences_changed = lambda save: bar.on_preferences_changed({'save': save,
+		def preferences_changed(save): return bar.on_preferences_changed({'save': save,
 				'add_bookmarks_to_beginning': False,
 				'max_bookmarks': 15})
 

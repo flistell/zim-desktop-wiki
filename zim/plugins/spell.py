@@ -28,7 +28,7 @@ except ImportError:
 		import gi
 		gi.require_version('GtkSpell', '3.0')
 		from gi.repository import GtkSpell as gtkspell
-	except:
+	except BaseException:
 		gtkspell = None
 else:
 	gtkspell = None
@@ -48,12 +48,12 @@ and hasattr(gtkspellcheck.SpellChecker._LanguageList, 'from_broker'):
 	def new_from_broker(cls, broker):
 		try:
 			return orig_from_broker(broker)
-		except:
+		except BaseException:
 			lang = []
 			for language in broker.list_languages():
 				try:
 					lang.append((language, code_to_name(language)))
-				except:
+				except BaseException:
 					logger.exception('While loading language for: %s', language)
 
 			return cls(sorted(lang, key=lambda language: language[1]))
@@ -154,7 +154,7 @@ class SpellPageViewExtension(PageViewExtension):
 		logger.debug('Spellcheck language: %s', lang)
 		try:
 			checker = self._adapter_cls(textview, lang)
-		except:
+		except BaseException:
 			ErrorDialog(self.pageview, (
 				_('Could not load spell checking'),
 					# T: error message

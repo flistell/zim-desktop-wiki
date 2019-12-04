@@ -89,7 +89,7 @@ def _iswritable(dir):
 		try:
 			f.write('Test')
 			f.remove(cleanup=False)
-		except:
+		except BaseException:
 			return False
 		else:
 			return True
@@ -517,7 +517,7 @@ class Notebook(ConnectorMixin, SignalEmitter):
 	def _store_page_async_thread_main(self, page, parsetree, error):
 		try:
 			page._store_tree(parsetree)
-		except:
+		except BaseException:
 			error.set()
 			logger.exception('Error in background save')
 

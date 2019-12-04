@@ -226,7 +226,7 @@ class Dumper(TextDumper):
 		rows = strings
 
 		aligns, _wraps = TableParser.get_options(attrib)
-		rowline = lambda row: '&'.join([' ' + cell + ' ' for cell in row]) + '\\tabularnewline\n\hline'
+		def rowline(row): return '&'.join([' ' + cell + ' ' for cell in row]) + '\\tabularnewline\n\hline'
 		aligns = ['l' if a == 'left' else 'r' if a == 'right' else 'c' if a == 'center' else 'l' for a in aligns]
 
 		for i, row in enumerate(rows):

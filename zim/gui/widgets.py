@@ -42,7 +42,7 @@ try:
 	import gi
 	gi.require_version('GtkSource', '3.0')
 	from gi.repository import GtkSource
-except:
+except BaseException:
 	GtkSource = None
 
 import zim
@@ -3057,7 +3057,7 @@ class Dialog(Gtk.Dialog, ConnectorMixin):
 			w, h = self.get_size()
 			self.uistate['windowsize'] = (w, h)
 			self.save_uistate()
-		except:
+		except BaseException:
 			logger.exception('Exception in do_response()')
 
 		if destroy:
@@ -3472,7 +3472,7 @@ class FileDialog(Dialog):
 				pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 128, 128)
 			self.preview_widget.set_from_pixbuf(pixbuf)
 			self.filechooser.set_preview_widget_active(True)
-		except:
+		except BaseException:
 			self.filechooser.set_preview_widget_active(False)
 		return
 
@@ -3505,7 +3505,7 @@ class FileDialog(Dialog):
 		'''Add shortcuts for the notebook folder and page folder'''
 		try:
 			self.filechooser.add_shortcut_folder(notebook.folder.path)
-		except:
+		except BaseException:
 			pass # GError on doubles ..
 
 		if path:
@@ -3513,7 +3513,7 @@ class FileDialog(Dialog):
 			if hasattr(page, 'source') and page.source is not None:
 				try:
 					self.filechooser.add_shortcut_folder(page.source.dir.path)
-				except:
+				except BaseException:
 					pass # GError on doubles ..
 
 	def set_file(self, file):
@@ -4054,7 +4054,7 @@ class ImageView(Gtk.Layout):
 		if file and file.exists():
 			try:
 				pixbuf = GdkPixbuf.Pixbuf.new_from_file(str(file))
-			except:
+			except BaseException:
 				logger.exception('Could not load image "%s"', file)
 		else:
 			pass
@@ -4086,7 +4086,7 @@ class ImageView(Gtk.Layout):
 				self._render_size = size
 				try:
 					self._render()
-				except:
+				except BaseException:
 					logger.exception('Exception while rendering image')
 
 				return False

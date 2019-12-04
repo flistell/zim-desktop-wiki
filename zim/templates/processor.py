@@ -139,7 +139,7 @@ class TemplateProcessor(object):
 						raise AssertionError('TODO also allow files from template resources')
 				else:
 					raise AssertionError('Unknown instruction: %s' % element.tag)
-			except:
+			except BaseException:
 				raise
 
 	def _loop(self, output, element, context):

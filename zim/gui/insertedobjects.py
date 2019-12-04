@@ -243,7 +243,7 @@ def _find_plugin(name):
 				if objtype.name == name:
 					activatable = klass.check_dependencies_ok()
 					return (plugin_name, klass.plugin_info['name'], activatable, klass)
-		except:
+		except BaseException:
 			continue
 	return None
 
@@ -442,6 +442,6 @@ class InsertedObjectUI(object):
 			except ValueError:
 				return # dialog cancelled
 			self.pageview.insert_object_model(otype, model)
-		except:
+		except BaseException:
 			zim.errors.exception_handler(
 				'Exception during action: %s' % name)

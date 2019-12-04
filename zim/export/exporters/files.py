@@ -106,7 +106,7 @@ class MultiFileExporter(FilesExporterBase):
 				for file in self.export_attachments_iter(pages.notebook, page):
 					yield file
 					# XXX FIXME remove need for notebook here
-			except:
+			except BaseException:
 				raise
 				logger.exception('Error while exporting: %s', page.name)
 
@@ -115,7 +115,7 @@ class MultiFileExporter(FilesExporterBase):
 				logger.info('Export index: %s', self.index_page)
 				yield self.index_page
 				self.export_index(self.index_page, pages)
-			except:
+			except BaseException:
 				logger.exception('Error while exporting index')
 
 	def export_page(self, notebook, page, pages, prevpage=None, nextpage=None):

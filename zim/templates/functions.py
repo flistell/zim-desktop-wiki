@@ -54,7 +54,7 @@ def template_strftime(format, date=None):
 		# unfortunately there is no guarantee we can actually
 		# decode it ...
 		return string
-	except:
+	except BaseException:
 		logger.exception('Error in strftime "%s"', format)
 
 
@@ -65,7 +65,7 @@ def template_strfcal(format, date=None):
 		if date is None:
 			date = datetime.now()
 		return datetime.strfcal(format, date)
-	except:
+	except BaseException:
 		logger.exception('Error in strftime "%s"', format)
 
 @ExpressionFunction
@@ -73,5 +73,5 @@ def template_gettext(string):
 	'''Template function wrapper for gettext'''
 	try:
 		return (_(string))
-	except:
+	except BaseException:
 		logger.exception('Error in gettext "%s"', string)

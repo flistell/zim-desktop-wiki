@@ -26,7 +26,7 @@ from zim.gui.pageview import FIND_REGEX, SCROLL_TO_MARK_MARGIN, _is_heading_tag
 
 
 # FIXME, these methods should be supported by pageview - need anchors - now it is a HACK
-_is_heading = lambda iter: bool(list(filter(_is_heading_tag, iter.get_tags())))
+def _is_heading(iter): return bool(list(filter(_is_heading_tag, iter.get_tags())))
 
 def find_heading(buffer, n):
 	'''Find the C{n}th heading in the buffer

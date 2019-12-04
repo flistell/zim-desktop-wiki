@@ -210,7 +210,7 @@ added:
 		vcs.commit_version('test 1')
 		self.assertRaises(NoChangesError, vcs.commit_version, 'test 1')
 
-		ignorelines = lambda line: not (line.startswith('+++') or line.startswith('---'))
+		def ignorelines(line): return not (line.startswith('+++') or line.startswith('---'))
 			# these lines contain time stamps
 		diff = vcs.diff(versions=(0, 1))
 		diff = ''.join(filter(ignorelines, diff))
@@ -361,7 +361,7 @@ class TestGit(VersionControlBackendTests, tests.TestCase):
 		#self.assertRaises(NoChangesError, vcs.commit_version, 'test 2')
 
 		# these lines contain file perms & hashes
-		ignorelines = lambda line: not (line.startswith('new') or line.startswith('index'))
+		def ignorelines(line): return not (line.startswith('new') or line.startswith('index'))
 		diff = vcs.diff(versions=('HEAD'))
 # john@joran:~/code/zim/TEST$ git diff master^
 # diff --git a/foo/bar/bar.txt b/foo/bar/bar.txt
@@ -517,7 +517,7 @@ A foo/bar/baz.txt
 		vcs.commit_version('test 1')
 		self.assertRaises(NoChangesError, vcs.commit_version, 'test 1')
 
-		ignorelines = lambda line: not (line.startswith('+++') or line.startswith('---'))
+		def ignorelines(line): return not (line.startswith('+++') or line.startswith('---'))
 		# these lines contain time stamps
 
 		file.write('foo\nbaz\n')

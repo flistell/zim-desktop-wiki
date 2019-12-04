@@ -22,7 +22,7 @@ logger = logging.getLogger('zim.plugins.zeitgeist')
 try:
 	from zeitgeist.client import ZeitgeistClient
 	from zeitgeist.datamodel import Event, Subject, Interpretation, Manifestation
-except:
+except BaseException:
 	ZeitgeistClient = None
 
 

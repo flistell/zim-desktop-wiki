@@ -478,7 +478,7 @@ class CustomToolManagerUI(object):
 		logger.info('Execute custom tool %s', tool.name)
 		try:
 			self._exec_custom_tool(tool)
-		except:
+		except BaseException:
 			zim.errors.exception_handler(
 				'Exception during action: %s' % tool.name)
 

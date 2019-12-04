@@ -135,7 +135,7 @@ def start_listening(handler):
 			# before whether or not it is functional)
 			os.unlink(SERVER_ADDRESS)
 		listener = Listener(SERVER_ADDRESS, SERVER_ADDRESS_FAMILY)
-	except:
+	except BaseException:
 		logger.exception('Error setting up Listener')
 		return False
 	else:
@@ -180,7 +180,7 @@ def _do_accept(listener, handler, *a):
 
 			conn.send('OK')
 			conn.close()
-	except:
+	except BaseException:
 		logger.exception('Error while handling incoming connection')
 
 	return True

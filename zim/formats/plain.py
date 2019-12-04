@@ -199,8 +199,8 @@ class Dumper(DumperClass):
 		aligns, _wraps = TableParser.get_options(attrib)
 		rows = TableParser.convert_to_multiline_cells(strings)
 		maxwidths = TableParser.width3dim(rows)
-		rowsep = lambda y: TableParser.rowsep(maxwidths, x='+', y=y)
-		rowline = lambda row: TableParser.rowline(row, maxwidths, aligns)
+		def rowsep(y): return TableParser.rowsep(maxwidths, x='+', y=y)
+		def rowline(row): return TableParser.rowline(row, maxwidths, aligns)
 
 		# print table
 		table.append(rowsep('-'))
