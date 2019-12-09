@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: Unknown
+
+
+====== Syntax ======
+
+Zim support two differents syntax:
+* [[+Wiki Syntax|Wiki Syntax]] based on Doku Syntax
+* [[+Markdown Syntax|Markdown Syntax]]
