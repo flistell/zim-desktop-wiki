@@ -22,7 +22,7 @@ info = {
 	'name': 'wiki',
 	'desc': 'Zim Wiki Format',
 	'mimetype': 'text/x-zim-wiki',
-	'extension': 'txt',
+	'extension': 'zim',
 	'native': True,
 	'import': True,
 	'export': True,

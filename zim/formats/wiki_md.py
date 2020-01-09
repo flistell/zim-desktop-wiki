@@ -14,7 +14,7 @@ info = {
 	'name': 'wikimd',
 	'desc': 'Zim Markdown Format',
 	'mimetype': 'text/x-zim-markdown',
-	'extension': 'md',
+	'extension': 'txt',
 	'native': True,
 	'import': True,
 	'export': True,
