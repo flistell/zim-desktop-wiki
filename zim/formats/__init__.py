@@ -181,8 +181,8 @@ def encode_xml(text):
 _WIKI_SYNTAX = [
 	# Syntax friendly name, module name, extension
 	# TODO: generate the list from syntax info (native == True)
-	('Zim Wiki', 'wiki', '.zim'),
 	('Markdown', 'wiki_md', '.txt'),
+	('Zim Wiki', 'wiki', '.zim'),
 ]
 
 def get_extensions(syntax=None):

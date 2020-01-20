@@ -13,7 +13,7 @@ WIKI_FORMAT_VERSION = 'zim md 0.4'
 info = {
 	'name': 'wikimd',
 	'desc': 'Zim Markdown Format',
-	'mimetype': 'text/x-zim-markdown',
+	'mimetype': 'text/markdown',
 	'extension': 'txt',
 	'native': True,
 	'import': True,
